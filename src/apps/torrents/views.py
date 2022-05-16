@@ -66,6 +66,18 @@ def eztv(query):
             results = eztv_parser.find_all('tr', attrs={'name': 'hover'})
             resp = []
             for r in results:
+                torrent_link = ''
+                try:
+                    torrent_link = r.find_all('td')[2].find_all('a')[1]['href']
+                except IndexError:
+                    torrent_link = ''
+
+                magnet_link = ''
+                try:
+                    magnet_link = r.find_all('td')[2].find_all('a')[0]['href']
+                except IndexError:
+                    magnet_link = ''
+                
                 data = {
                     'name': r.find('a', attrs={'class', 'epinfo'}).text.strip(),
                     'size': r.find_all('td')[3].text,
@@ -74,8 +86,8 @@ def eztv(query):
                     'leechers': '',
                     'category': '',
                     'link': 'https://eztv.ro' + r.find('a', attrs={'class', 'epinfo'})['href'],
-                    'torrent': r.find_all('td')[2].find_all('a')[1]['href'],
-                    'magnet': r.find_all('td')[2].find_all('a')[0]['href']
+                    'torrent': torrent_link,
+                    'magnet': magnet_link
                 }
                 resp.append(data)
             return jsonify(resp)
