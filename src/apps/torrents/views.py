@@ -10,13 +10,16 @@
     'magnet': 'MAGNET'
 }
 """
-from flask import jsonify, request
+from flask import jsonify, request, Blueprint
 from bs4 import BeautifulSoup
 
 import feedparser
 import requests
 import urllib.parse
 
+torrents = Blueprint('torrents', __name__)
+
+@torrents.route('/nyaa/<query>')
 def nyaa(query, category=None):
     NYAA_CATEGORIES = {
         'anime': '1_0',
@@ -52,6 +55,7 @@ def nyaa(query, category=None):
         resp.append(data)
     return jsonify(resp)
 
+@torrents.route('/eztv/<query>')
 def eztv(query):
     url = 'https://eztv.ro/search/' + query
     try:
