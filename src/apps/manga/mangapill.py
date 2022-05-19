@@ -4,13 +4,16 @@
     "name": "NAME",
     "cover": "COVER",
     "detail": "/mangapill/d/ID",
-    "id": "ID"
+    "id": ID
 }
 /mangapill/d/<id>
 {
     "name": "NAME",
     "cover": "COVER",
-    "id": "ID",
+    "summary": "SUMMARY",
+    "status": "STATUS",
+    "genres": []
+    "id": ID,
     "chapters": [
         {
             "name": "NAME",
@@ -64,12 +67,23 @@ def mangapill_detail(mangaid):
     mangapill = requests.get(url)
     if mangapill.status_code == requests.codes.ok:
         mangapill_parser = BeautifulSoup(mangapill.text, 'html.parser')
+
+        detail_div = mangapill_parser.find('div', class_="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3")
+
         resp = {
             "name": mangapill_parser.find('h1', class_="font-bold text-lg md:text-2xl").text,
             "cover": mangapill_parser.find('img')['data-src'],
+            "summary": mangapill_parser.find('p', class_="text-sm text--secondary").text,
+            "status": detail_div.find_all('div', class_="")[3].text,
             "id": mangaid,
+            "genres": [],
             "chapters": []
         }
+
+        genres = mangapill_parser.find_all('a', class_="text-sm mr-1 text-brand")
+        for g in genres:
+            resp['genres'].append(g.text)
+
         chapters_div = mangapill_parser.find('div', class_='my-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6')
         chapters = chapters_div.find_all('a')
         chapters.reverse()
