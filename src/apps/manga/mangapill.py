@@ -130,4 +130,3 @@ def mangapill_chapter(mangaid, number):
         return jsonify(resp)
     else:
         return jsonify({'error': 'Cannot connect to MangaPill'})
-
