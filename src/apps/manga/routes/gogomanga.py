@@ -50,7 +50,7 @@ def gogomanga_search(query):
         for r in results:
             _id = r.find('a')['href'].split('/')[-2]
             data = {
-                "name": r.find('div', attrs={'class': 'tt'}).text,
+                "name": r.find('div', attrs={'class': 'tt'}).text.strip(),
                 "cover": r.find('img')['src'],
                 "detail": "/manga/gogomanga/d/" + _id,
                 "id": _id

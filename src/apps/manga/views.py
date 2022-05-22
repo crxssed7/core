@@ -1,6 +1,6 @@
 from flask import Blueprint
-from . import mangapill
-from . import gogomanga
+from .routes import mangapill
+from .routes import gogomanga
 
 manga = Blueprint('manga', __name__)
 
