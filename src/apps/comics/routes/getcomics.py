@@ -19,6 +19,14 @@ from bs4 import BeautifulSoup
 
 import requests
 
+def getcomics_info():
+    information = {
+        'name': 'GetComics',
+        'url': 'https://getcomics.info',
+        'type': 'download'
+    }
+    return jsonify(information)
+
 def getcomics(query):
     url = 'https://getcomics.info/?s=' + query
 

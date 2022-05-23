@@ -35,6 +35,14 @@ from bs4 import BeautifulSoup
 
 import requests
 
+def gogomanga_info():
+    information = {
+        'name': 'GogoManga',
+        'url': 'https://gogomanga.fun',
+        'type': 'stream'
+    }
+    return jsonify(information)
+
 def gogomanga_search(query):
     url = "https://gogomanga.fun/?s=" + query
 

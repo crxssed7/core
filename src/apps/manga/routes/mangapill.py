@@ -35,6 +35,14 @@ from bs4 import BeautifulSoup
 
 import requests
 
+def mangapill_info():
+    information = {
+        'name': 'MangaPill',
+        'url': 'https://mangapill.com',
+        'type': 'stream'
+    }
+    return jsonify(information)
+
 def mangapill_search(query):
     url = "https://mangapill.com/search?q=" + str(query).replace(' ', '+')
 

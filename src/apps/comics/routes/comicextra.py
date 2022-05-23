@@ -35,6 +35,14 @@ from bs4 import BeautifulSoup
 
 import requests
 
+def comicextra_info():
+    information = {
+        'name': 'ComicExtra',
+        'url': 'https://www.comicextra.com',
+        'type': 'stream'
+    }
+    return jsonify(information)
+
 def comicextra_search(query):
     url = "https://www.comicextra.com/comic-search?key=" + query
 
