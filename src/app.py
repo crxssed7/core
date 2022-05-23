@@ -14,7 +14,7 @@ def create_app():
     app.register_blueprint(comics, url_prefix="/comics")
     app.register_blueprint(manga, url_prefix="/manga")
     
-    app.add_url_rule('/sources', 'sources', sources)
+    app.add_url_rule('/sources/', 'sources', sources)
 
     return app
 
