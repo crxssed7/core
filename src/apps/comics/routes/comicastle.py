@@ -104,4 +104,32 @@ def comicastle_detail(comicid):
     else:
         return jsonify({'error': 'Could not connect to Comicastle'}), 400
 
-# TODO: GET CHAPTERS
+def comicastle_chapter(comicid, number):
+    url = "https://comicastle.org/home/detail/" + comicid
+
+    comicastle = requests.get(url)
+    if comicastle.status_code == requests.codes.ok:
+        comicastle_parser = BeautifulSoup(comicastle.text, 'html.parser')
+
+        chapters_table = comicastle_parser.find_all('table')[-1].tbody
+        chapters = chapters_table.find_all('tr')
+
+        chapter_url = chapters[number - 1].td.a['href'].replace('pbp', 'swiper')
+        chapter_name = chapters[number - 1].td.a.text.strip()
+
+        resp = {
+            "name": chapter_name,
+            "parent": "/comics/comicastle/d/" + comicid,
+            "images": []
+        }
+
+        chapter = requests.get(chapter_url)
+        if chapter.status_code == requests.codes.ok:
+            chapter_parser = BeautifulSoup(chapter.text, 'html.parser')
+            pages = chapter_parser.find_all('div', attrs={'class': 'swiper-slide'})
+            for p in pages:
+                resp['images'].append(p.img['src'].strip())
+
+        return jsonify(resp)
+    else:
+        return jsonify({'error': 'Cannot connect to ComicExtra'})
