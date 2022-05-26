@@ -39,8 +39,28 @@ def mangapill_info():
     information = {
         'name': 'MangaPill',
         'url': 'https://mangapill.com',
-        'type': 'stream'
+        'type': 'stream',
+        'items': []
     }
+
+    url = "https://mangapill.com/chapters"
+
+    mangapill = requests.get(url)
+    if mangapill.status_code == requests.codes.ok:
+        mangapill_parser = BeautifulSoup(mangapill.text, 'html.parser')
+
+        results_div = mangapill_parser.find('div', class_="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3")
+        items = results_div.find_all('div', class_="")
+        for i in items:
+            _id = i.find('a', class_="mt-1.5 leading-tight text-secondary")['href'].split('/')[2]
+            itm = {
+                "name": i.find('div', class_="line-clamp-2 text-sm font-bold").text,
+                "cover": i.a.figure.img['data-src'],
+                "id": _id,
+                "detail": "/manga/mangapill/d/" + _id
+            }
+            information['items'].append(itm)
+
     return jsonify(information)
 
 def mangapill_search(query):

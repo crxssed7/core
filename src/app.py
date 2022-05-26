@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from apps.torrents.views import torrents
+from apps.downloads.views import downloads
 from apps.comics.views import comics
 from apps.manga.views import manga
 from sources import SOURCES
@@ -10,7 +10,7 @@ def sources():
 def create_app():
     app = Flask(__name__)
     
-    app.register_blueprint(torrents, url_prefix="/torrents")
+    app.register_blueprint(downloads, url_prefix="/downloads")
     app.register_blueprint(comics, url_prefix="/comics")
     app.register_blueprint(manga, url_prefix="/manga")
     

@@ -35,6 +35,33 @@ from bs4 import BeautifulSoup
 
 import requests
 
+def comicastle_info():
+    information = {
+        'name': 'Comicastle',
+        'url': 'https://comicastle.org',
+        'type': 'stream',
+        'items': []
+    }
+
+    url = "https://comicastle.org/library/postdate/desc"
+
+    comicastle = requests.get(url)
+    if comicastle.status_code == requests.codes.ok:
+        comicastle_parser = BeautifulSoup(comicastle.text, 'html.parser')
+
+        items = comicastle_parser.find_all('div', class_="col-xl-2 col-lg-3 col-md-3 col-6 mb-1 shadow-sm rounded")
+        for i in items:
+            _id = i.a['href'].split('/')[-2]
+            itm = {
+                "name": i.find('p', class_="font-small-3 mb-0 text-center text-bold-700").text.strip(),
+                "cover": i.find('img')['data-src'],
+                "detail": "/comics/comicastle/d/" + _id,
+                "id": _id
+            }
+            information['items'].append(itm)
+
+    return jsonify(information)
+
 def comicastle_search(query):
     url = "https://comicastle.org/library/search/result"
 

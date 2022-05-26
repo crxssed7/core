@@ -39,8 +39,27 @@ def comicextra_info():
     information = {
         'name': 'ComicExtra',
         'url': 'https://www.comicextra.com',
-        'type': 'stream'
+        'type': 'stream',
+        'items': []
     }
+
+    url = "https://www.comicextra.com/popular-comic"
+
+    comicextra = requests.get(url)
+    if comicextra.status_code == requests.codes.ok:
+        comicextra_parser = BeautifulSoup(comicextra.text, 'html.parser')
+
+        items = comicextra_parser.find_all('div', attrs={'class': 'cartoon-box'})
+        for i in items:
+            _id = i.a['href'].split('/')[-1]
+            itm = {
+                "name": i.find('h3').text,
+                "cover": i.find('img')['src'],
+                "detail": "/comics/comicextra/d/" + _id,
+                "id": _id
+            }
+            information['items'].append(itm)
+
     return jsonify(information)
 
 def comicextra_search(query):
@@ -78,7 +97,7 @@ def comicextra_detail(comicid):
         resp = {
             "name": comicextra_parser.find('span', attrs={'class': 'title-1'}).text,
             "cover": comicextra_parser.find('div', attrs={'class': 'movie-image'}).find('img')['src'],
-            "summary": comicextra_parser.find('div', attrs={'id': 'film-content'}).text,
+            "summary": comicextra_parser.find('div', attrs={'id': 'film-content'}).text.strip(),
             "status": comicextra_parser.find('dd', attrs={'class': 'status'}).a.text,
             "id": comicid,
             "genres": [],

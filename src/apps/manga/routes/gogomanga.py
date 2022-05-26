@@ -39,8 +39,27 @@ def gogomanga_info():
     information = {
         'name': 'GogoManga',
         'url': 'https://gogomanga.fun',
-        'type': 'stream'
+        'type': 'stream',
+        'items': []
     }
+
+    url = "https://gogomanga.fun"
+
+    gogomanga = requests.get(url)
+    if gogomanga.status_code == requests.codes.ok:
+        gogomanga_parser = BeautifulSoup(gogomanga.text, 'html.parser')
+
+        items = gogomanga_parser.find_all('div', attrs={'class': 'bsx'})
+        for i in items:
+            _id = i.find('a')['href'].split('/')[-2]
+            itm = {
+                "name": i.find('div', attrs={'class': 'tt'}).text.strip(),
+                "cover": i.find('img')['src'],
+                "detail": "/manga/gogomanga/d/" + _id,
+                "id": _id
+            }
+            information['items'].append(itm)
+
     return jsonify(information)
 
 def gogomanga_search(query):
