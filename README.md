@@ -1,3 +1,3 @@
 # Core
 
-A REST API that serves download links for torrents and other media.
+A REST API that serves image links for comics and manga.
