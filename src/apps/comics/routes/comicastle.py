@@ -40,6 +40,7 @@ def comicastle_info():
         'name': 'Comicastle',
         'url': 'https://comicastle.org',
         'type': 'stream',
+        'logo': 'https://comicastle.org/upload/logo/cc__logo.png',
         'items': []
     }
 

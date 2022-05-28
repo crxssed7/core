@@ -40,6 +40,7 @@ def gogomanga_info():
         'name': 'GogoManga',
         'url': 'https://gogomanga.fun',
         'type': 'stream',
+        'logo': 'https://gogomanga.fun/wp-content/uploads/2021/06/LogoMakr.png',
         'items': []
     }
 

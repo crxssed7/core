@@ -40,6 +40,7 @@ def mangapill_info():
         'name': 'MangaPill',
         'url': 'https://mangapill.com',
         'type': 'stream',
+        'logo': 'https://mangapill.com/static/favicon/apple-touch-icon.png',
         'items': []
     }
 

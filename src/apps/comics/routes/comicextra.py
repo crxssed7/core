@@ -40,6 +40,7 @@ def comicextra_info():
         'name': 'ComicExtra',
         'url': 'https://www.comicextra.com',
         'type': 'stream',
+        'logo': 'https://www.comicextra.com/images/site/front/logo.png',
         'items': []
     }
 

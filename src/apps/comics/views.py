@@ -1,8 +1,14 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from .routes import comicextra
 from .routes import comicastle
 
+from sources import SOURCES
+
 comics = Blueprint('comics', __name__)
+
+@comics.route('/')
+def src_comics():
+    return jsonify(SOURCES['comics'])
 
 comics.add_url_rule('/comicextra/', 'comicextra_info', comicextra.comicextra_info)
 comics.add_url_rule('/comicextra/s/<query>/', 'comicextra_search', comicextra.comicextra_search)
