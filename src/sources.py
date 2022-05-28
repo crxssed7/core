@@ -1,10 +1,10 @@
 SOURCES = {
     'comics': [
         {
-            'name': 'GetComics',
-            'endpoint': '/comics/getcomics',
-            'search_endpoint': '/comics/getcomics/<query>',
-            'type': 'download'
+            'name': 'Comicastle',
+            'endpoint': '/comics/comicastle',
+            'search_endpoint': '/comics/comicastle/s/<query>',
+            'type': 'stream'
         },
         {
             'name': 'ComicExtra',
@@ -27,17 +27,23 @@ SOURCES = {
             'type': 'stream'
         }
     ],
-    'torrents': [
+    'downloaders': [
         {
             'name': 'Nyaa.si',
-            'endpoint': '/torrents/nyaa',
-            'search_endpoint': '/torrents/nyaa/<query>',
+            'endpoint': '/downloads/nyaa',
+            'search_endpoint': '/downloads/nyaa/<query>',
             'type': 'download'
         },
         {
             'name': 'Eztv',
-            'endpoint': '/torrents/eztv',
-            'search_endpoint': '/torrents/eztv/<query>',
+            'endpoint': '/downloads/eztv',
+            'search_endpoint': '/downloads/eztv/<query>',
+            'type': 'download'
+        },
+        {
+            'name': 'GetComics',
+            'endpoint': '/downloads/getcomics',
+            'search_endpoint': '/downloads/getcomics/<query>',
             'type': 'download'
         }
     ]
