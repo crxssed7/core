@@ -33,6 +33,14 @@ SOURCES = {
             'type': 'stream',
             'logo': 'https://i.ibb.co/hW5vhqT/mpill.png',
             'url': 'https://mangapill.com'
+        },
+        {
+            'name': 'Mangafreak',
+            'endpoint': '/manga/mangafreak',
+            'search_endpoint': '/manga/mangafreak/s/<query>',
+            'type': 'stream',
+            'logo': 'https://64.media.tumblr.com/avatar_74828f58cdcd_128.pnj',
+            'url': 'https://w13.mangafreak.net'
         }
     ]
 }

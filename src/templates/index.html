@@ -46,8 +46,9 @@
 
         .responsive {
             width: 100%;
-            max-width: 200px;
+            max-width: 150px;
             height: auto;
+            border-radius: 0.25rem;
         }
 
         .container {
@@ -112,7 +113,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ m.name }}</h5>
                         <p class="card-text">Endpoint: <code>{{ m.endpoint }}</code></p>
-                        <a href="{{ m.endpoint }}" class="btn btn-secondary" id="comic-link">{{ m.name }}</a>
+                        <a href="{{ m.endpoint }}" class="btn btn-secondary" id="comic-link">Check out {{ m.name }}</a>
                     </div>
                 </div>
             </div>

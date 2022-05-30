@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
 from .routes import mangapill
 from .routes import gogomanga
+from .routes import mangafreak
 
 from sources import SOURCES
 
@@ -19,3 +20,5 @@ manga.add_url_rule('/gogomanga/', 'gogomanga_info', gogomanga.gogomanga_info)
 manga.add_url_rule('/gogomanga/s/<query>/', 'gogomanga_search', gogomanga.gogomanga_search)
 manga.add_url_rule('/gogomanga/d/<mangaid>/', 'gogomanga_detail', gogomanga.gogomanga_detail)
 manga.add_url_rule('/gogomanga/d/<mangaid>/<int:number>/', 'gogomanga_chapter', gogomanga.gogomanga_chapter)
+
+manga.add_url_rule('/mangafreak/', 'mangafreak_info', mangafreak.mangafreak_info)
