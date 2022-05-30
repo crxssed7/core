@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, render_template
-from apps.downloaders.views import downloaders
 from apps.comics.views import comics
 from apps.manga.views import manga
 from sources import SOURCES
@@ -13,7 +12,6 @@ def home():
 def create_app():
     app = Flask(__name__)
     
-    app.register_blueprint(downloaders, url_prefix="/downloads")
     app.register_blueprint(comics, url_prefix="/comics/")
     app.register_blueprint(manga, url_prefix="/manga")
     
