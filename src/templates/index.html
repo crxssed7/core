@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core API - Comics and Manga</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <style>
+        .header {
+            padding: 50px;
+            background-color: whitesmoke;
+            border-bottom: 2px solid lightgray;
+        }
+
+        .cst-container {
+            display: flex;
+            flex-direction: column;
+            max-height: 100%;
+            height: 25vh;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+            text-align: center;
+        }
+
+        .card {
+            margin: 10px !important;
+            border: 2px solid lightgray !important;
+            background-color: whitesmoke !important;
+        }
+
+        .col-sm-6 {
+            padding: 0px !important;
+        }
+
+        .responsive {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+        }
+
+        .container {
+            padding: 12px !important;
+        }
+
+        summary {
+            padding: 12px;
+            background-color: whitesmoke;
+            border-radius: 0.25rem;
+        }
+
+        details {
+            border: 2px solid lightgrey;
+            margin: 10px 0px;
+            border-radius: 0.25rem;
+        }
+
+        .docs {
+            margin: 12px;
+        }
+    </style>
+
+    <div class="header">
+        <center>
+            <h1>Core API</h1>
+            <p>A REST API for comics and manga.</p>
+        </center>
+    </div>
+    <div class="container">
+        <h3>Comics</h3>
+        <div class="row">
+            {% for c in comics %}
+            <div class="col-sm-6">
+                <div class="card" style="width: auto;">
+                    <a href="{{ c.link }}">
+                        <div class="cst-container">
+                            <img src="{{ c.logo }}" alt="{{ c.name }}" class="responsive">
+                        </div>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ c.name }}</h5>
+                        <p class="card-text">Endpoint: <code>{{ c.endpoint }}</code></p>
+                        <a href="{{ c.endpoint }}" class="btn btn-secondary" id="comic-link">Check out {{ c.name }}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container">
+        <h3>Manga</h3>
+        <div class="row">
+            {% for m in manga %}
+            <div class="col-sm-6">
+                <div class="card" style="width: auto;">
+                    <a href="{{ m.link }}">
+                        <div class="cst-container">
+                            <img src="{{ m.logo }}" alt="{{ m.name }}" class="responsive">
+                        </div>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ m.name }}</h5>
+                        <p class="card-text">Endpoint: <code>{{ m.endpoint }}</code></p>
+                        <a href="{{ m.endpoint }}" class="btn btn-secondary" id="comic-link">{{ m.name }}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container">
+        <h3>Documentation</h3>
+        <p>This API is very simple. All endpoints follow the same model:</p>
+
+        <details>
+            <summary>Search Result Model</summary>
+            <div class="docs">
+                <p style="margin: 0px;">Endpoint: <code>/{comics or manga}/{source name}/s/{query}</code></p>
+                <p>Example: <code>/comics/comicastle/s/venom/</code></p>
+                <pre>[
+    {
+        "cover": "https://comicastle.org/upload/cover/thumb/venom-lethal-protector-9115096041.jpg",
+        "detail": "/comics/comicastle/d/3323",
+        "id": "3323",
+        "name": "Venom: Lethal Protector"
+    },
+    ...
+]</pre>
+            </div>
+        </details>
+
+        <details>
+            <summary>Details Model</summary>
+            <div class="docs">
+                <p style="margin: 0px;">Endpoint: <code>/{comics or manga}/{source name}/d/{id}</code></p>
+                <p>Example: <code>/comics/comicastle/d/3323/</code></p>
+                <pre>{
+    "chapters": [
+        {
+            "detail": "/comics/comicastle/d/3323/1",
+            "name": "Issue : 1",
+            "number": 1
+        },
+        {
+            "detail": "/comics/comicastle/d/3323/2",
+            "name": "Issue : 2",
+            "number": 2
+        }
+    ],
+    "cover": "https://comicastle.org/upload/cover/venom-lethal-protector-9115096041.jpg",
+    "genres": [
+        "Superhero"
+    ],
+    "id": "3323",
+    "name": "Venom: Lethal Protector (2022)",
+    "status": "Ongoing",
+    "summary": "AN EPIC RETURN! Before Carnage and space gods, clones and toxins, and the revelation that he was a father, Eddie Brock was a down-on-his-luck reporter who had tried to take his own life and been saved by an extraterrestrial alien. This all-new story set in the character's earliest days welcomes Venom co-creator David Michelenie back into the symbiote hive with open arms, as he and rising star Ivan Fiorelli unite to tell a new, horrifying tale that not only revisits the wicked web-slinger's past, but hints at what's to come in his future!"
+}</pre>
+            </div>
+        </details>
+
+        <details>
+            <summary>Chapter Model</summary>
+            <div class="docs">
+                <p style="margin: 0px;">Endpoint: <code>/{comics or manga}/{source name}/d/{id}/{chapter number}</code></p>
+                <p>Example: <code>/comics/comicastle/d/3323/1/</code></p>
+                <pre>{
+    "images": [
+        "https://drive.google.com/uc?id=1m3NmOrsirnKNFZuOWPiOP7W5yiCN9IJ4",
+        "http://drive.google.com/uc?id=1mZAMxxP-0wGy6_NljolX-z2wwALRHjPK",
+        "http://drive.google.com/uc?id=1m-HLwIzp80tGFlnHHLyGkG0sXmooSNUN",
+        "http://drive.google.com/uc?id=1m4g40o8XusW1qPkws2ZnjsB_e40KDI1W",
+        "http://drive.google.com/uc?id=1mQM1-wbqk721BES1FVbElF82juliODAj",
+        "http://drive.google.com/uc?id=1mHJVvQg28NG7X0g3AihgnOWmjy0DKj9_",
+        "http://drive.google.com/uc?id=1meJ0alx9SNZinj37vIETAkxdpbLUtic1",
+        "http://drive.google.com/uc?id=1m1So8gtdqgf89LAZAtpsCxHKD7V3Pc4O",
+        "http://drive.google.com/uc?id=1mYhuGtpPcRRizG0qiqwaOOPpGKHdW3oz",
+        "http://drive.google.com/uc?id=1mCkJKeSxzdK2FfQpyVRXqWlp6IgmOfiA",
+        "http://drive.google.com/uc?id=1m0NEAJ5xdBGmma3W1OSFqMbfa7qFwFx6",
+        "http://drive.google.com/uc?id=1mXV63zWVjqg5ZogSMvgU7SZVJ6piy9yi",
+        "http://drive.google.com/uc?id=1m8nm_8lyG_CqE5cQjpe66gYW9eTEObhP",
+        "http://drive.google.com/uc?id=1m5oXjaJvKK5MEfcCIdqoI2KAyEqwH8MW",
+        "http://drive.google.com/uc?id=1m2A1ruVH24Qh8jfjr7GqB37PPAZJj8JL",
+        "http://drive.google.com/uc?id=1mDpDuXztiXddmwmJJsColHPaX0BpHF-0",
+        "http://drive.google.com/uc?id=1mXIFGvjDB510ALCEMpCE41tBVML-e4-I",
+        "http://drive.google.com/uc?id=1mWcyI3-8lxGQuxZXNFS8qlXZpE1_S37d",
+        "http://drive.google.com/uc?id=1mHj2CueqjrX0palXqduLVzBulllcX2Jg",
+        "http://drive.google.com/uc?id=1lzYpjJRJNbG1Vp9ZI4hK1uI3FQ6C-bNZ",
+        "http://drive.google.com/uc?id=1mZHSfMCATtSHiG2DND1BHC7zy_TLxW4V",
+        "http://drive.google.com/uc?id=1mWo7A0RBoEy-2zaD9CLXUAQBh3BsDIAy",
+        "http://drive.google.com/uc?id=1mEh-4c5G2-mzYL37RyCVf2M9fNMuD27z",
+        "http://drive.google.com/uc?id=1n05O-PV2VvX1dSYQha8ur2XzDSfxWSqS",
+        "http://drive.google.com/uc?id=1mJQqwUkFbo3iJsaFaoWTFIHSuNYhdPgb",
+        "http://drive.google.com/uc?id=1mbLXGF9ONOEkrFePsWYo6TzcZdrA_pja",
+        "http://drive.google.com/uc?id=1n0IICp2Pvb9SfQGkAOf0-8OWfO4ZzOHP",
+        "http://drive.google.com/uc?id=1mRKbwCEpHzuoQIVfN2IDqHJ_Am-cPXuH",
+        "http://drive.google.com/uc?id=1mFOdadySBw6gZwe7SsH77KVHJKZKKtz5",
+        "http://drive.google.com/uc?id=1meeBoGdUG4v_XI4As-eO29iIiKATUJRM",
+        "http://drive.google.com/uc?id=1n0VS143Gecc7__nb50MIB6CrUVp2l5Az",
+        "http://drive.google.com/uc?id=1mT7xz5ORc1I_O3LP6UjI6djcy-tPFbpb",
+        "http://drive.google.com/uc?id=1m6T8PPD8OPj25RDa4NYmXLMC32LAlKIa"
+    ],
+    "name": "Issue : 1",
+    "parent": "/comics/comicastle/d/3323"
+}</pre>
+            </div>
+        </details>
+    </div>
+    <footer class="text-lg-start footer" style="background-color: whitesmoke; border-top: 2px solid lightgray;">
+        <div class="container p-4">
+            <p style="font-size: small; margin-bottom: 0px;">
+                <a href="https://github.com/crxssed7/core" class="link">Core is open source.</a>
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>

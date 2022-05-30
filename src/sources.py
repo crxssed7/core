@@ -5,14 +5,16 @@ SOURCES = {
             'endpoint': '/comics/comicastle',
             'search_endpoint': '/comics/comicastle/s/<query>',
             'type': 'stream',
-            'logo': 'https://comicastle.org/upload/logo/cc__logo.png'
+            'logo': 'https://comicastle.org/upload/logo/cc__logo.png',
+            'link': 'https://comicastle.org/home'
         },
         {
             'name': 'ComicExtra',
             'endpoint': '/comics/comicextra',
             'search_endpoint': '/comics/comicextra/s/<query>',
             'type': 'stream',
-            'logo': 'https://www.comicextra.com/images/site/front/logo.png'
+            'logo': 'https://www.comicextra.com/images/site/front/logo.png',
+            'link': 'https://www.comicextra.com'
         }
     ],
     'manga': [
@@ -21,14 +23,16 @@ SOURCES = {
             'endpoint': '/manga/gogomanga',
             'search_endpoint': '/manga/gogomanga/s/<query>',
             'type': 'stream',
-            'logo': 'https://gogomanga.fun/wp-content/uploads/2021/06/LogoMakr.png'
+            'logo': 'https://gogomanga.fun/wp-content/uploads/2021/06/LogoMakr.png',
+            'link': 'https://gogomanga.fun'
         },
         {
             'name': 'MangaPill',
             'endpoint': '/manga/mangapill',
             'search_endpoint': '/manga/mangapill/s/<query>',
             'type': 'stream',
-            'logo': 'https://mangapill.com/static/favicon/apple-touch-icon.png'
+            'logo': 'https://i.ibb.co/hW5vhqT/mpill.png',
+            'link': 'https://mangapill.com'
         }
     ],
     'downloaders': [
