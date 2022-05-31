@@ -125,6 +125,30 @@
         <p>This API is very simple. All endpoints follow the same model:</p>
 
         <details>
+            <summary>Information Model</summary>
+            <div class="docs">
+                <p style="margin: 0px;">This endpoint can also be used to retrieve the latest/popular manga/comic for the site.</p>
+                <p style="margin: 0px;">Endpoint: <code>/{comics or manga}/{source name}</code></p>
+                <p>Example: <code>/comics/comicastle</code></p>
+                <pre>{
+    "items": [
+        {
+            "cover": "https://comicastle.org/upload/cover/thumb/new-avengers-finale-3482583115.jpg",
+            "detail": "/comics/comicastle/d/3473",
+            "id": "3473",
+            "name": "New Avengers Finale"
+        },
+        ...
+    ],
+    "logo": "https://comicastle.org/upload/logo/cc__logo.png",
+    "name": "Comicastle",
+    "type": "stream",
+    "url": "https://comicastle.org"
+}</pre>
+            </div>
+        </details>
+
+        <details>
             <summary>Search Result Model</summary>
             <div class="docs">
                 <p style="margin: 0px;">Endpoint: <code>/{comics or manga}/{source name}/s/{query}</code></p>
