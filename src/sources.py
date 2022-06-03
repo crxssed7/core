@@ -31,7 +31,7 @@ SOURCES = {
             'endpoint': '/manga/mangapill',
             'search_endpoint': '/manga/mangapill/s/<query>',
             'type': 'stream',
-            'logo': 'https://i.ibb.co/hW5vhqT/mpill.png',
+            'logo': 'https://res.cloudinary.com/crxssed/image/upload/v1654273328/mpill_mumedn.png',
             'url': 'https://mangapill.com'
         }
     ]
