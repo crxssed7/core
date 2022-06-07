@@ -76,14 +76,16 @@ def comicextra_search(query):
         results = comicextra_parser.find_all('div', attrs={'class': 'cartoon-box'})
         resp = []
         for r in results:
-            _id = r.a['href'].split('/')[-1]
-            data = {
-                "name": r.find('h3').a.text,
-                "cover": r.find('img')['src'],
-                "detail": "/comics/comicextra/d/" + _id,
-                "id": _id
-            }
-            resp.append(data)
+            print(r)
+            if not r.h3.text == "Not found":
+                _id = r.a['href'].split('/')[-1]
+                data = {
+                    "name": r.find('h3').a.text,
+                    "cover": r.find('img')['src'],
+                    "detail": "/comics/comicextra/d/" + _id,
+                    "id": _id
+                }
+                resp.append(data)
         return jsonify(resp)
     else:
         return jsonify({'error': 'Could not connect to ComicExtra'}), 400
