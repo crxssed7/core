@@ -56,7 +56,7 @@ def comicastle_info():
             itm = {
                 "name": i.find('p', class_="font-small-3 mb-0 text-center text-bold-700").text.strip(),
                 "cover": i.find('img')['data-src'],
-                "detail": "/comics/comicastle/d/" + _id,
+                "detail": "/comics/comicastle/d/" + _id + '/',
                 "id": _id
             }
             information['items'].append(itm)
@@ -85,7 +85,7 @@ def comicastle_search(query):
             data = {
                 "name": r.find('p', class_="font-small-3 mb-0 text-center text-bold-700").text,
                 "cover": r.find('img')['data-src'],
-                "detail": "/comics/comicastle/d/" + _id,
+                "detail": "/comics/comicastle/d/" + _id + '/',
                 "id": _id
             }
             resp.append(data)
@@ -124,7 +124,7 @@ def comicastle_detail(comicid):
             chapter = {
                 "name": c.td.a.text.strip(),
                 "number": number,
-                "detail": "/comics/comicastle/d/" + comicid + "/" + str(number)
+                "detail": "/comics/comicastle/d/" + comicid + "/" + str(number) + "/"
             }
             resp['chapters'].append(chapter)
             number = number + 1

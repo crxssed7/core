@@ -56,7 +56,7 @@ def gogomanga_info():
             itm = {
                 "name": i.find('div', attrs={'class': 'tt'}).text.strip(),
                 "cover": i.find('img')['src'],
-                "detail": "/manga/gogomanga/d/" + _id,
+                "detail": "/manga/gogomanga/d/" + _id + "/",
                 "id": _id
             }
             information['items'].append(itm)
@@ -80,7 +80,7 @@ def gogomanga_search(query):
             data = {
                 "name": r.find('div', attrs={'class': 'tt'}).text.strip(),
                 "cover": r.find('img')['src'],
-                "detail": "/manga/gogomanga/d/" + _id,
+                "detail": "/manga/gogomanga/d/" + _id + "/",
                 "id": _id
             }
             resp.append(data)
@@ -117,7 +117,7 @@ def gogomanga_detail(mangaid):
             chapter = {
                 "name": c.find('span', attrs={'class': 'chapternum'}).text,
                 "number": number,
-                "detail": "/manga/gogomanga/d/" + str(mangaid) + "/" + str(number)
+                "detail": "/manga/gogomanga/d/" + str(mangaid) + "/" + str(number) + "/"
             }
             resp['chapters'].append(chapter)
             number = number + 1

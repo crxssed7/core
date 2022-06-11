@@ -58,7 +58,7 @@ def mangapill_info():
                 "name": i.find('div', class_="line-clamp-2 text-sm font-bold").text,
                 "cover": i.a.figure.img['data-src'],
                 "id": _id,
-                "detail": "/manga/mangapill/d/" + _id
+                "detail": "/manga/mangapill/d/" + _id + "/"
             }
             information['items'].append(itm)
 
@@ -83,7 +83,7 @@ def mangapill_search(query):
                 "name": r.find('div', class_="mt-3 font-black leading-tight line-clamp-2").text,
                 "cover": r.a.figure.img['data-src'],
                 "id": _id,
-                "detail": "/manga/mangapill/d/" + _id
+                "detail": "/manga/mangapill/d/" + _id + "/"
             }
             resp.append(data)
         return jsonify(resp)
@@ -121,7 +121,7 @@ def mangapill_detail(mangaid):
             chapter = {
                 "name": c.text,
                 "number": number,
-                "detail": "/manga/mangapill/d/" + str(mangaid) + "/" + str(number)
+                "detail": "/manga/mangapill/d/" + str(mangaid) + "/" + str(number) + "/"
             }
             resp['chapters'].append(chapter)
             number = number + 1

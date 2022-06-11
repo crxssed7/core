@@ -56,7 +56,7 @@ def comicextra_info():
             itm = {
                 "name": i.find('h3').text,
                 "cover": i.find('img')['src'],
-                "detail": "/comics/comicextra/d/" + _id,
+                "detail": "/comics/comicextra/d/" + _id + "/",
                 "id": _id
             }
             information['items'].append(itm)
@@ -82,7 +82,7 @@ def comicextra_search(query):
                 data = {
                     "name": r.find('h3').a.text,
                     "cover": r.find('img')['src'],
-                    "detail": "/comics/comicextra/d/" + _id,
+                    "detail": "/comics/comicextra/d/" + _id + "/",
                     "id": _id
                 }
                 resp.append(data)
@@ -121,7 +121,7 @@ def comicextra_detail(comicid):
             chapter = {
                 "name": c.td.a.text,
                 "number": number,
-                "detail": "/comics/comicextra/d/" + comicid + "/" + str(number)
+                "detail": "/comics/comicextra/d/" + comicid + "/" + str(number) + "/"
             }
             resp['chapters'].append(chapter)
             number = number + 1
