@@ -99,10 +99,15 @@ def mangapill_detail(mangaid):
 
         detail_div = mangapill_parser.find('div', class_="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3")
 
+        summary_p = mangapill_parser.find('p', class_="text-sm text--secondary")
+        summary = ''
+        if summary_p:
+            summary = summary_p.text
+
         resp = {
             "name": mangapill_parser.find('h1', class_="font-bold text-lg md:text-2xl").text,
             "cover": mangapill_parser.find('img')['data-src'],
-            "summary": mangapill_parser.find('p', class_="text-sm text--secondary").text,
+            "summary": summary,
             "status": detail_div.find_all('div', class_="")[3].text,
             "id": mangaid,
             "genres": [],
