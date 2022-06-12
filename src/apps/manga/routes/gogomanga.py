@@ -95,10 +95,15 @@ def gogomanga_detail(mangaid):
     if gogomanga.status_code == requests.codes.ok:
         gogomanga_parser = BeautifulSoup(gogomanga.text, 'html.parser')
 
+        summary = ''
+        summary_p = gogomanga_parser.find('div', class_="entry-content entry-content-single").p
+        if summary_p:
+            summary = summary_p.text
+
         resp = {
             "name": gogomanga_parser.find('h1', attrs={'class': 'entry-title'}).text,
             "cover": gogomanga_parser.find('img', class_="attachment- size- wp-post-image")['src'],
-            "summary": "",
+            "summary": summary,
             "status": gogomanga_parser.find('div', class_="tsinfo").find('div').contents[-1].text,
             "id": mangaid,
             "genres": [],
